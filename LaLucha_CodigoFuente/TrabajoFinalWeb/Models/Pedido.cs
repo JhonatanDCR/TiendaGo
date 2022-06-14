@@ -11,8 +11,7 @@ namespace TrabajoFinalWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Pedido
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,11 +22,8 @@ namespace TrabajoFinalWeb.Models
         }
     
         public int ID { get; set; }
-        [DisplayName("¿Fue Atendido?")]
         public bool Atendido { get; set; }
-        [DisplayName("Cliente")]
         public string Detalle { get; set; }
-        [DisplayName("Atendio el Empleado")]
         public string IdEmpleado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

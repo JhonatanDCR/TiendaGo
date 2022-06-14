@@ -11,8 +11,7 @@ namespace TrabajoFinalWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,11 +23,9 @@ namespace TrabajoFinalWeb.Models
     
         public int ID { get; set; }
         public string Nombre { get; set; }
-        [DisplayName("Tipo de Producto")]
         public int IdTipoProducto { get; set; }
         public decimal Precio { get; set; }
         public string Descripcion { get; set; }
-        [DisplayName("Archivo")]
         public string imagen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

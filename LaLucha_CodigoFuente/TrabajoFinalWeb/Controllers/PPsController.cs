@@ -86,7 +86,7 @@ namespace TrabajoFinalWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pP).State = EntityState.Modified;
+                db.Entry(pP).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -85,7 +85,7 @@ namespace TrabajoFinalWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(modoDePago).State = EntityState.Modified;
+                db.Entry(modoDePago).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

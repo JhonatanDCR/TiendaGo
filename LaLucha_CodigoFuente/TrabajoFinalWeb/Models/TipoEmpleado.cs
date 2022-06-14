@@ -11,8 +11,7 @@ namespace TrabajoFinalWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class TipoEmpleado
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +21,6 @@ namespace TrabajoFinalWeb.Models
         }
     
         public int ID { get; set; }
-        [DisplayName("Cargo en la Empresa")]
         public string Descripcion { get; set; }
         public Nullable<decimal> Sueldo { get; set; }
     

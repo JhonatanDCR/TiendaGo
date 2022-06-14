@@ -123,7 +123,7 @@ namespace TrabajoFinalWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(detalleBoleta).State = EntityState.Modified;
+                db.Entry(detalleBoleta).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

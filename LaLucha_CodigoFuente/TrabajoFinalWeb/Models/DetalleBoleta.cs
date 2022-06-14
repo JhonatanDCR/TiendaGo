@@ -11,13 +11,11 @@ namespace TrabajoFinalWeb.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class DetalleBoleta
     {
         public int ID { get; set; }
         public int IdPedido { get; set; }
-        [DisplayName("Monto Total")]
         public decimal MontoTotal { get; set; }
         public int IdModoDePago { get; set; }
     
