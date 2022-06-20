@@ -538,7 +538,9 @@
     <Content Include="Views\Empleados\Recuperar.cshtml" />
     <Content Include="Views\Shared\_Layout_Index.cshtml" />
     <Content Include="Views\Proveedor\Index.cshtml" />
-    <Content Include="Views\Proveedor\Detalle.cshtml" />
+    <Content Include="Views\Proveedor\Detail.cshtml" />
+    <Content Include="Views\Proveedor\Create.cshtml" />
+    <Content Include="Views\Proveedor\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

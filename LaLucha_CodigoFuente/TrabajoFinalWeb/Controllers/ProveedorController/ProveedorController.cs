@@ -10,6 +10,9 @@ using Newtonsoft.Json;
 using Hotel_UPC.Authorization;
 using System.Text;
 
+//tutoriales: https://www.tutorialsteacher.com/webapi/consume-web-api-delete-method-in-aspnet-mvc
+//https://www.youtube.com/watch?v=NxL-H6hzsjc
+
 namespace TrabajoFinalWeb.Controllers.ProveedorController
 {
     [UserLoggedOn]
@@ -40,21 +43,24 @@ namespace TrabajoFinalWeb.Controllers.ProveedorController
         }
 
         // GET: Proveedor/id
-        public ActionResult Detail(int? id)
+        public ActionResult Detail(int id)
         {
-            List<ProveedorViewModel> modelList = new List<ProveedorViewModel>();
+            ProveedorViewModel model = new ProveedorViewModel();
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/proveedor/"+id).Result;
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                modelList = JsonConvert.DeserializeObject<List<ProveedorViewModel>>(data);
-                //return Json(response.Content);
+                model = JsonConvert.DeserializeObject<ProveedorViewModel>(data);
             }
 
-            return View(modelList);
+            return View(model);
         }
 
         //POST proveedor
+        public ActionResult Create()
+        {
+            return View();
+        }
         [HttpPost]
         public ActionResult Create(ProveedorViewModel model)
         {
@@ -69,7 +75,8 @@ namespace TrabajoFinalWeb.Controllers.ProveedorController
             return View();
         }
 
-        public ActionResult Edit(int id)
+        //PUT proveedor/id
+        public ActionResult Edit(int id) //GET proveedor/id
         {
             ProveedorViewModel model = new ProveedorViewModel();
             HttpResponseMessage response = client.GetAsync(client.BaseAddress + "/proveedor/"+id).Result;
@@ -79,18 +86,38 @@ namespace TrabajoFinalWeb.Controllers.ProveedorController
                 model = JsonConvert.DeserializeObject<ProveedorViewModel>(data);
             }
 
-            return View();
+            return View(model);
         }
-
-        //[HttpDelete]
-        /*public ActionResult Delete(int id)
+        //esta función se ejecuta cuando haya POST del formulario (botón submit)
+        [HttpPost]
+        public ActionResult Edit(ProveedorViewModel model)
         {
+            string data = JsonConvert.SerializeObject(model);
+            StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = client.PutAsync(client.BaseAddress + "/proveedor/" + model.id, content).Result;
 
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index");
             }
-        }*/
+            return RedirectToAction("Index");
+        }
+
+        //DELETE proveedor/id
+        public ActionResult Delete(int id)
+        {
+            //client.DefaultRequestHeaders.Add(HttpDeleteAttribute, "DELETE");
+            var deleteTask = client.DeleteAsync(client.BaseAddress + "/proveedor/" + id);
+            deleteTask.Wait();
+            HttpResponseMessage response = deleteTask.Result;
+            //HttpResponseMessage response = client.DeleteAsync(client.BaseAddress + "/proveedor/" + id.ToString()).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            return RedirectToAction("Index");
+        }
 
     }
 }
