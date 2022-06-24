@@ -198,7 +198,7 @@ namespace TrabajoFinalWeb.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RegistrarPedido(int IdModoDePago)
+        public ActionResult RegistrarPedido(int IdModoDePago, string ubicación_envio, string coordenadas_envio)
         {
             IEnumerable<TrabajoFinalWeb.Models.P> lista = Getpedidos();
             IEnumerable<TrabajoFinalWeb.Models.PP> listaPP = Getproducto_pedidos();
@@ -227,6 +227,8 @@ namespace TrabajoFinalWeb.Controllers
             DetalleBoleta detalle = new DetalleBoleta();
             detalle.IdModoDePago = IdModoDePago;
             detalle.IdPedido = id_Pedido;
+            detalle.ubicación_envio = ubicación_envio;
+            detalle.coordenadas_envio = coordenadas_envio;
             decimal montoTotal= (from a in db.Productos_Pedidos.
                               Include("Producto").Include("Pedido").AsEnumerable()
                              where a.IdPedido == id_Pedido

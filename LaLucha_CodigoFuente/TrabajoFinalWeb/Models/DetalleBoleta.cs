@@ -18,6 +18,8 @@ namespace TrabajoFinalWeb.Models
         public int IdPedido { get; set; }
         public decimal MontoTotal { get; set; }
         public int IdModoDePago { get; set; }
+        public string ubicación_envio { get; set; }
+        public string coordenadas_envio { get; set; }
     
         public virtual ModoDePago ModoDePago { get; set; }
         public virtual Pedido Pedido { get; set; }

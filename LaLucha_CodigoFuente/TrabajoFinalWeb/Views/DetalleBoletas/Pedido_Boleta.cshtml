@@ -105,6 +105,16 @@
         </div>
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.ubicación_envio, "ubicación_envio", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ubicación_envio, new { htmlAttributes = new { @class = "form-control", id= "nombreUbicacion" } })
+            @Html.ValidationMessageFor(model => model.ubicación_envio, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.coordenadas_envio, new {id= "coordenadas_envio" })
+
     <br /><br />
 
     <div id="map"></div>
@@ -115,6 +125,9 @@
         let geocoder;
         let responseDiv;
         let response;
+        //declara los elementos input ubicacion------------------------------------
+        const nombreUbi = document.getElementById('nombreUbicacion');
+        const coordUbi = document.getElementById('coordenadas_envio');
 
         function initMap() {
             map = new google.maps.Map(document.getElementById("map"), {
@@ -122,7 +135,7 @@
                 center: { lat: -12.06872, lng: -75.21653 },
                 mapTypeControl: false,
             });
-      
+
             geocoder = new google.maps.Geocoder();
 
             const inputText = document.createElement("input");
@@ -169,6 +182,9 @@
             );
             clearButton.addEventListener("click", () => {
                 clear();
+                //también borra el valor de los input ubicacion al hacer click en Limpiar------------------
+                nombreUbi.value = null;
+                coordUbi.value = null;
             });
             clear();
         }
@@ -179,22 +195,27 @@
         }
 
         function geocode(request) {
-            clear();             
-        geocoder
-            .geocode(request)
-            .then((result) => {
-                const { results } = result;
+            clear();
+            geocoder
+                .geocode(request)
+                .then((result) => {
+                    const { results } = result;
 
-                map.setCenter(results[0].geometry.location);
-                marker.setPosition(results[0].geometry.location);
-                marker.setMap(map);
-                //responseDiv.style.display = "block";
-                //response.innerText = JSON.stringify(result, null, 2);
-                return results;
-            })
-            .catch((e) => {
-                alert("Geocode was not successful for the following reason: " + e);
-            });
+                    map.setCenter(results[0].geometry.location);
+                    marker.setPosition(results[0].geometry.location);
+                    marker.setMap(map);
+                    responseDiv.style.display = "block";
+                    response.innerText = JSON.stringify(result, null, 2);
+
+                    //ingresa el resultado al input ubicacion---------------------------------
+                    nombreUbi.value = results[0].formatted_address;
+                    coordUbi.value = results[0].place_id;
+
+                    return results;
+                })
+                .catch((e) => {
+                    alert("Geocode was not successful for the following reason: " + e);
+                });
         }
 
         window.initMap = initMap;
@@ -218,7 +239,7 @@
     }
         
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Volver a la lista", "Index")
     </div>
 
 </body>

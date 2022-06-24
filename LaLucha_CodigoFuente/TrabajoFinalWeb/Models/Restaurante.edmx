@@ -22,6 +22,8 @@
           <Property Name="IdPedido" Type="int" Nullable="false" />
           <Property Name="MontoTotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IdModoDePago" Type="int" Nullable="false" />
+          <Property Name="ubicación_envio" Type="varchar" MaxLength="100" />
+          <Property Name="coordenadas_envio" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -309,6 +311,8 @@
           <Property Name="IdModoDePago" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ModoDePago" Relationship="Self.FK_DetalleBoleta_ModoDePago" FromRole="DetalleBoleta" ToRole="ModoDePago" />
           <NavigationProperty Name="Pedido" Relationship="RestauranteModel.FK_DetalleBoleta_Pedido" FromRole="DetalleBoleta" ToRole="Pedido" />
+          <Property Name="ubicación_envio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="coordenadas_envio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Empleado">
           <Key>
@@ -620,6 +624,8 @@
           <EntitySetMapping Name="DetalleBoletas">
             <EntityTypeMapping TypeName="RestauranteModel.DetalleBoleta">
               <MappingFragment StoreEntitySet="DetalleBoleta">
+                <ScalarProperty Name="coordenadas_envio" ColumnName="coordenadas_envio" />
+                <ScalarProperty Name="ubicación_envio" ColumnName="ubicación_envio" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IdPedido" ColumnName="IdPedido" />
                 <ScalarProperty Name="MontoTotal" ColumnName="MontoTotal" />
